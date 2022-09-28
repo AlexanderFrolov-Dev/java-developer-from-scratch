@@ -21,7 +21,7 @@ public class Main {
                 }
 
                 if (value != 0) {
-                    System.out.println(EXCLAMATION_MARK + value + " = " + multiplyBy + " = " + multiplier);
+                    System.out.println(value + EXCLAMATION_MARK + " = " + multiplyBy + " = " + multiplier);
                 }
 
                 multiplyBy = "";
