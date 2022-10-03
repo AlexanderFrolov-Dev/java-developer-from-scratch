@@ -1,16 +1,16 @@
 public class Smartphone {
     private String brand;
     private String model;
-    private String OS;
+    private String os;
     private double displaySize;
     private int numberOfCores;
-    private int RAM;
-    private boolean hasNFC;
+    private int ram;
+    private boolean hasNfc;
 
-    public Smartphone(String OS, double displaySize, boolean hasNFC) {
-        this.OS = OS;
+    public Smartphone(String os, double displaySize, boolean hasNfc) {
+        this.os = os;
         this.displaySize = displaySize;
-        this.hasNFC = hasNFC;
+        this.hasNfc = hasNfc;
     }
 
     public String getBrand() {
@@ -29,12 +29,12 @@ public class Smartphone {
         this.model = model;
     }
 
-    public String getOS() {
-        return OS;
+    public String getOs() {
+        return os;
     }
 
-    public void setOS(String OS) {
-        this.OS = OS;
+    public void setOs(String os) {
+        this.os = os;
     }
 
     public double getDisplaySize() {
@@ -53,19 +53,19 @@ public class Smartphone {
         this.numberOfCores = numberOfCores;
     }
 
-    public int getRAM() {
-        return RAM;
+    public int getRam() {
+        return ram;
     }
 
-    public void setRAM(int RAM) {
-        this.RAM = RAM;
+    public void setRam(int ram) {
+        this.ram = ram;
     }
 
-    public boolean isHasNFC() {
-        return hasNFC;
+    public boolean isHasNfc() {
+        return hasNfc;
     }
 
-    public void setHasNFC(boolean hasNFC) {
-        this.hasNFC = hasNFC;
+    public void setHasNfc(boolean hasNfc) {
+        this.hasNfc = hasNfc;
     }
 }
