@@ -7,6 +7,6 @@ public class Main {
         System.out.println("Title: " + fightClub.getTitle());
         System.out.println("Author: " + fightClub.getAuthor());
         System.out.println("Number of pages: " + fightClub.getNumberOfPages());
-        System.out.println("ISBN: " + fightClub.getISBN());
+        System.out.println("ISBN: " + fightClub.getIsbn());
     }
 }
