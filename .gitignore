@@ -1,6 +1,7 @@
 
 # Created by https://www.gitignore.io/api/java,linux,macos,maven,windows,jetbrains
 # Edit at https://www.gitignore.io/?templates=java,linux,macos,maven,windows,jetbrains
+.iml
 
 ### Java ###
 # Compiled class file
