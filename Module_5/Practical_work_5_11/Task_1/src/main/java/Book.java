@@ -4,11 +4,11 @@ public class Book {
     private final int numberOfPages;
     private final String isbn;
 
-    public Book(String title, String author, int numberOfPages, String numberISBN) {
+    public Book(String title, String author, int numberOfPages, String numberIsbn) {
         this.title = title;
         this.author = author;
         this.numberOfPages = numberOfPages;
-        this.isbn = numberISBN;
+        this.isbn = numberIsbn;
     }
 
     public String getTitle() {
