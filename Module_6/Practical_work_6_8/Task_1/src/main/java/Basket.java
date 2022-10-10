@@ -1,12 +1,13 @@
 public class Basket {
 
-    private static int count = 0;
-    private String items = "";
-    private int totalPrice = 0;
+    private static int count;
+    private static int totalPriceInAllBaskets;
+    private static int totalCountInAllBaskets;
+    private String items;
+    private int totalPrice;
     private int limit;
-    private double totalWeight = 0;
-    private static int totalPriceInAllBaskets = 0;
-    private static int totalCountInAllBaskets = 0;
+    private double totalWeight;
+
 
     public Basket() {
         increaseCount(1);
