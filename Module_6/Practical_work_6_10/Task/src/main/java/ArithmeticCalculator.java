@@ -1,7 +1,6 @@
 public class ArithmeticCalculator {
     private final double a;
     private final double b;
-    private Operation operation;
 
     public ArithmeticCalculator(double a, double b) {
         this.a = a;
@@ -17,18 +16,10 @@ public class ArithmeticCalculator {
     }
 
     public double calculate(Operation operation) {
-        double result = 0;
-        switch (operation) {
-            case ADD:
-                result = a + b;
-                break;
-            case SUBTRACT:
-                result = a - b;
-                break;
-            case MULTIPLY:
-                result = a * b;
-                break;
-        }
-        return result;
+        return switch (operation) {
+            case ADD -> a + b;
+            case SUBTRACT -> a - b;
+            case MULTIPLY -> a * b;
+        };
     }
 }
