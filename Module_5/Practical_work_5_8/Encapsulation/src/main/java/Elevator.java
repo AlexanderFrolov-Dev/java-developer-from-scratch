@@ -28,25 +28,12 @@ public class Elevator {
         if (floor < minFloor || floor > maxFloor) {
             System.out.println("Неверно введен номер этажа. Он должен быть в пределах от "
                     + minFloor + " до " + maxFloor + ".");
-        } else if (floor == currentFloor) {
-            System.out.println("Вы уже находитесь на выбранном этаже.");
-        } else if (floor < currentFloor) {
-            while (floor != currentFloor) {
-                moveDown();
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                System.out.println("Текущий этаж: " + currentFloor);
-            }
         } else {
             while (floor != currentFloor) {
-                moveUp();
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                if (floor < currentFloor) {
+                    moveDown();
+                } else {
+                    moveUp();
                 }
                 System.out.println("Текущий этаж: " + currentFloor);
             }
