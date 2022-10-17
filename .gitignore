@@ -2,6 +2,7 @@
 # Created by https://www.gitignore.io/api/java,linux,macos,maven,windows,jetbrains
 # Edit at https://www.gitignore.io/?templates=java,linux,macos,maven,windows,jetbrains
 .iml
+pom.xml
 
 ### Java ###
 # Compiled class file
