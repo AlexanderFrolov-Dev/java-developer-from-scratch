@@ -4,35 +4,36 @@ public class Main {
     public static void main(String[] args) {
         while (true) {
             System.out.println("Введите первое число:");
-            String inputLine = new Scanner(System.in).nextLine();
+            Scanner scanner = new Scanner(System.in);
+            String inputLine = scanner.nextLine();
             String firstNumber;
 
             while (!isDigit(inputLine)) {
                 System.out.println("Введенная строка не является числом. Введите первое число:");
-                inputLine = new Scanner(System.in).nextLine();
+                inputLine = scanner.nextLine();
             }
 
             firstNumber = inputLine;
 
             System.out.println("Введите символ арифметического действия:");
-            inputLine = new Scanner(System.in).nextLine();
+            inputLine = scanner.nextLine();
             String arithmeticActionCharacter;
 
             while (!isArithmeticActionCharacter(inputLine)) {
                 System.out.println("Введенная строка не символом арифметического действия."
                         .concat(" Введите символом арифметического действия"));
-                inputLine = new Scanner(System.in).nextLine();
+                inputLine = scanner.nextLine();
             }
 
             arithmeticActionCharacter = inputLine;
 
             System.out.println("Введите второе число:");
-            inputLine = new Scanner(System.in).nextLine();
+            inputLine = scanner.nextLine();
             String secondNumber;
 
             while (!isDigit(inputLine)) {
                 System.out.println("Введенная строка не является числом. Введите второе число:");
-                inputLine = new Scanner(System.in).nextLine();
+                inputLine = scanner.nextLine();
             }
 
             secondNumber = inputLine;
