@@ -8,7 +8,7 @@ public class PhoneCleanerRegex {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String correctPhoneNumber;
-        Pattern pattern = Pattern.compile("(\\+?)(\\D*)([0-9]?)(\\D*)(9([0-9]{2}))(\\D*)([0-9]{3})(\\D*)([0-9]{2})(\\D*)([0-9]{2})?");
+        Pattern pattern = Pattern.compile("(\\+?)(\\D*)([0-9]?)(\\D*)(9([0-9]{2}))(\\D*)([0-9]{3})(\\D*)([0-9]{2})(\\D*)([0-9]{2})");
 
         while (true) {
             String input = scanner.nextLine();
