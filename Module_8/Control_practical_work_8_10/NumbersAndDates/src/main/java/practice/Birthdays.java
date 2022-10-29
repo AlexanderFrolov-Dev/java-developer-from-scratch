@@ -20,7 +20,7 @@ public class Birthdays {
     public static String collectBirthdays(int year, int month, int day) {
         LocalDate birthday = LocalDate.of(year, month, day);
         LocalDate currentDate = LocalDate.now();
-        int age = (int) birthday.until(currentDate, ChronoUnit.YEARS);
+        long age = birthday.until(currentDate, ChronoUnit.YEARS);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy - E").localizedBy(new Locale("us"));
         String result = "";
         //TODO реализуйте метод для построения строки в следующем виде
@@ -28,7 +28,7 @@ public class Birthdays {
         //1 - 31.12.1991 - Tue
 
         if (currentDate.isAfter(birthday) || currentDate.isEqual(birthday)) {
-            for (int i = 0; i <= age; i++) {
+            for (long i = 0; i <= age; i++) {
                 LocalDate nextBirthday = birthday.plusYears(i);
                 result += i + " - " + formatter.format(nextBirthday) + "\n";
             }
