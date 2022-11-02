@@ -27,6 +27,7 @@ public class Main {
 //                            + words[1]
 //                            + todoList.edit(Integer.parseInt(words[1]), input.substring(input.indexOf(' ') + 1).substring(input.indexOf(' ')))
 //                            + input.substring(input.indexOf(' ') + 1).substring(input.indexOf(' ')));
+
                     break;
                 case ("LIST"):
                     for (int i = 0; i < todoList.getTodos().size(); i++) {
