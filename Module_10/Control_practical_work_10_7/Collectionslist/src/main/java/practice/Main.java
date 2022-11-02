@@ -18,35 +18,16 @@ public class Main {
                         todoList.add(Integer.parseInt(commandElements[1]), getCase(commandElements));
                     } else {
                         todoList.add(getCase(commandElements));
-                        System.out.println("Добавлено дело \""
-                                .concat(getCase(commandElements))
-                                .concat("\""));
                     }
                     break;
                 case ("EDIT"):
-                    String oldCase = todoList.getTodos().get(Integer.parseInt(commandElements[1]));
                     todoList.edit(Integer.parseInt(commandElements[1]), getCase(commandElements));
-                    System.out.println("Дело \""
-                            .concat(oldCase)
-                            .concat("\"")
-                            .concat(" заменено на \"")
-                            .concat(getCase(commandElements))
-                            .concat("\""));
                     break;
                 case ("LIST"):
-                    for (int i = 0; i < todoList.getTodos().size(); i++) {
-                        System.out.print(i + " - " + todoList.getTodos().get(i) + System.lineSeparator());
-                    }
+                    todoList.getTodos();
                     break;
                 case ("DELETE"):
-                    if (Integer.parseInt(commandElements[1]) < todoList.getTodos().size()) {
-                        String oldValue = todoList.getTodos().get(Integer.parseInt(commandElements[1]));
-                        todoList.delete(Integer.parseInt(commandElements[1]));
-                        System.out.println("Дело \"".concat(oldValue).concat("\" удалено"));
-                    } else {
-                        System.out.println("Дело с таким номером не существует");
-                    }
-
+                    todoList.delete(Integer.parseInt(commandElements[1]));
             }
         }
         // TODO: написать консольное приложение для работы со списком дел todoList
