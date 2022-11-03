@@ -1,3 +1,5 @@
+package practice;
+
 import java.util.Scanner;
 
 public class Main {
@@ -18,6 +20,7 @@ public class Main {
     */
 
     public static void main(String[] args) {
+        System.out.println("Введите email");
         Scanner scanner = new Scanner(System.in);
         
         while (true) {
