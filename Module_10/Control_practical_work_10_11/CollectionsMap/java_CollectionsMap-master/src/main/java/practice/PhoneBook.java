@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 public class PhoneBook {
     Map<String, String> phoneBook = new TreeMap<>();
+    Map<String, String> namePhoneOrder = new TreeMap<>();
 
     public void addContact(String phone, String name) {
         if (phoneBook.containsKey(phone)) {
@@ -44,34 +45,19 @@ public class PhoneBook {
 
     public Set<String> getAllContacts() {
         Set<String> setContacts = new TreeSet<>();
-//        List<String> listNames = (List<String>) phoneBook.values();
+//        Set<String> setNames = (TreeSet<String>) phoneBook.values();
+
+        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
+            fillMap(entry);
+        }
+
+        for (Map.Entry<String, String> entry : namePhoneOrder.entrySet()) {
+            setContacts.add(entry.getKey() + " - " + entry.getValue());
+        }
+
 //        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
 //            setContacts.add(entry.getValue() + " - " + entry.getKey());
 //        }
-
-//        for (int i = 0; i < phoneBook.entrySet().size(); i++) {
-//            String value = phoneBook.
-//            for (int j = 0; j < phoneBook.entrySet().size(); j++) {
-//                if ()
-//            }
-//        }
-        StringBuilder name;
-        String withMultipleNumbers = "";
-
-        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
-            name = new StringBuilder(entry.getValue() + " - ");
-            for (Map.Entry<String, String> entry1 : phoneBook.entrySet()) {
-                if (entry.getValue().equals(entry1.getValue()) && !entry.getKey().equals(entry1.getKey())) {
-//                    setContacts.add(entry.getValue() + " - " + entry.getKey() + ", " + entry1.getKey());
-                    name.append(", ").append(entry.getKey());
-                }
-            }
-            setContacts.add(name.toString());
-        }
-
-        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
-            setContacts.add(entry.getValue() + " - " + entry.getKey());
-        }
 
         // формат одного контакта "Имя - Телефон"
         // если контактов нет в телефонной книге - вернуть пустой TreeSet
@@ -99,4 +85,36 @@ public class PhoneBook {
 
         return matcher.matches();
     }
+
+    private void fillMap(Map.Entry<String, String> entry) {
+        if (!namePhoneOrder.containsKey(entry.getValue())) {
+            namePhoneOrder.put(entry.getValue(), entry.getKey());
+        } else {
+            namePhoneOrder.put(entry.getValue(), namePhoneOrder.get(entry.getValue()) + ", " + entry.getKey());
+        }
+    }
 }
+//        List<String> listNames = (List<String>) phoneBook.values();
+//        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
+//            setContacts.add(entry.getValue() + " - " + entry.getKey());
+//        }
+
+//        for (int i = 0; i < phoneBook.entrySet().size(); i++) {
+//            String value = phoneBook.
+//            for (int j = 0; j < phoneBook.entrySet().size(); j++) {
+//                if ()
+//            }
+//        }
+//        StringBuilder name;
+//        String withMultipleNumbers = "";
+//
+//        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
+//            name = new StringBuilder(entry.getValue() + " - ");
+//            for (Map.Entry<String, String> entry1 : phoneBook.entrySet()) {
+//                if (entry.getValue().equals(entry1.getValue()) && !entry.getKey().equals(entry1.getKey())) {
+////                    setContacts.add(entry.getValue() + " - " + entry.getKey() + ", " + entry1.getKey());
+//                    name.append(", ").append(entry.getKey());
+//                }
+//            }
+//            setContacts.add(name.toString());
+//        }
