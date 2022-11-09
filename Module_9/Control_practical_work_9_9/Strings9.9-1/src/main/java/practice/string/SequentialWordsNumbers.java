@@ -16,9 +16,9 @@ public class SequentialWordsNumbers {
 
         if (!text.isBlank()) {
             substr = text;
-            sb.append("(").append(count).append(") ").append(substr).append(" ");
+            sb.append("(").append(count).append(") ").append(substr);
         }
 
-        return sb.toString().trim();
+        return sb.toString();
     }
 }
