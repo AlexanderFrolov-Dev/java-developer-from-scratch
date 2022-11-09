@@ -15,7 +15,7 @@ public class SequentialWordsNumbers {
         }
 
         if (!text.isBlank()) {
-            substr = text;
+            substr = text.trim();
             sb.append("(").append(count).append(") ").append(substr);
         }
 
