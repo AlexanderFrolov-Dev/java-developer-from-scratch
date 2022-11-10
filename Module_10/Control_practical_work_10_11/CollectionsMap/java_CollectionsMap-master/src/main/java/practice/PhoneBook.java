@@ -6,8 +6,7 @@ import java.util.regex.Pattern;
 
 public class PhoneBook {
     Map<String, String> phoneBook = new TreeMap<>();
-    Map<String, String> namePhoneOrder = new TreeMap<>();
-    Map<String, Set<String>> namePhone = new TreeMap<>();
+    Map<String, Set<String>> namePhoneForTest = new TreeMap<>();
 
     public void addContact(String phone, String name) {
         // проверьте корректность формата имени и телефона
@@ -45,33 +44,22 @@ public class PhoneBook {
         // если контактов нет в телефонной книге - вернуть пустой TreeSet
         Set<String> contacts = new TreeSet<>();
 
-//        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
-//            addElementInNamePhoneOrder(entry);
-//        }
+        addAllNumbersByContact();
 
-        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
-            namePhone.put(entry.getValue(), getContactByName(entry.getValue()));
-        }
-
-        for (Map.Entry<String, Set<String>> entry : namePhone.entrySet()) {
+        for (Map.Entry<String, Set<String>> entry : namePhoneForTest.entrySet()) {
             String[] array = new String[entry.getValue().size()];
             String[] subscriberNumbers = entry.getValue().toArray(array);
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < subscriberNumbers.length; i++) {
                 if (i < entry.getValue().size() - 1) {
                     sb.append(subscriberNumbers[i]).append(", ");
-                    System.out.println("not last: " + sb);
                 } else {
                     sb.append(subscriberNumbers[i]);
-                    System.out.println("last: " + sb);
                 }
             }
             contacts.add(entry.getKey() + " - " + sb);
         }
 
-//        for (Map.Entry<String, String> entry : namePhoneOrder.entrySet()) {
-//            contacts.add(entry.getKey() + " - " + entry.getValue());
-//        }
         return contacts;
     }
 
@@ -97,18 +85,13 @@ public class PhoneBook {
         return matcher.matches();
     }
 
-//    private void addElementInNamePhoneOrder(Map.Entry<String, String> entry) {
-//        if (!namePhoneOrder.containsKey(entry.getValue())) {
-//            namePhoneOrder.put(entry.getValue(), entry.getKey());
-//        } else {
-//            namePhoneOrder.put(entry.getValue(), namePhoneOrder.get(entry.getValue()) + ", " + entry.getKey());
-//        }
-//    }
-    private void addElementInNamePhoneOrder(Map.Entry<String, String> entry) {
-        if (!namePhoneOrder.containsKey(entry.getValue())) {
-            namePhoneOrder.put(entry.getValue(), entry.getKey());
-        } else {
-            namePhoneOrder.put(entry.getValue(), namePhoneOrder.get(entry.getValue()) + ", " + entry.getKey());
+    private void addAllNumbersByContact() {
+        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
+            namePhoneForTest.put(entry.getValue(), new TreeSet<>());
+        }
+
+        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
+            namePhoneForTest.get(entry.getValue()).add(entry.getKey());
         }
     }
 }
