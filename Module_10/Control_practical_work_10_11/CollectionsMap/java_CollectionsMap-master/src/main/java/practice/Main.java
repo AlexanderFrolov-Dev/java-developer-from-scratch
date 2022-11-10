@@ -4,12 +4,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        Гоша - 79001234567
-//        Гриша - 79011234567
-//        Маша - 79021234567 79051234567
-//        Миша - 79031234567
-//        Паша - 79041234567
-//        LIST
         PhoneBook phoneBook = new PhoneBook();
 
         while (true) {
