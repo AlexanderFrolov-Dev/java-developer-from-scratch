@@ -16,10 +16,11 @@ public class CoolNumbers {
         for (int i = 0; i < 3_000_000; i++) {
 
             number = generateLetter();
+            number.concat(String.valueOf(generateNumber()));
+            number.concat(generateLetter());
+            number.concat(generateLetter());
 
-            if (region.length() == 1) {
-                region = "0".concat(region);
-            }
+
         }
         return Collections.emptyList();
     }
@@ -45,7 +46,13 @@ public class CoolNumbers {
     }
 
     private static String generateRegion() {
-        return String.valueOf((int) (Math.random() * ++maxRegionNum) + minRegionNum);
+        String region = String.valueOf((int) (Math.random() * ++maxRegionNum) + minRegionNum);
+
+        if (region.length() == 1) {
+            region = "0".concat(region);
+        }
+
+        return region;
     }
 
     private static int generateNumber() {
