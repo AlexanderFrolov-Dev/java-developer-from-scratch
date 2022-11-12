@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class PhoneBook {
     Map<String, String> phoneBook = new TreeMap<>();
-    Map<String, Set<String>> namePhoneForTest = new TreeMap<>();
+    Map<String, Set<String>> namePhone = new TreeMap<>();
 
     public void addContact(String phone, String name) {
         if (isPhone(phone) && isName(name)) {
@@ -37,7 +37,7 @@ public class PhoneBook {
 
         addAllNumbersByContact();
 
-        for (Map.Entry<String, Set<String>> entry : namePhoneForTest.entrySet()) {
+        for (Map.Entry<String, Set<String>> entry : namePhone.entrySet()) {
             String[] array = new String[entry.getValue().size()];
             String[] subscriberNumbers = entry.getValue().toArray(array);
             StringBuilder sb = new StringBuilder();
@@ -70,11 +70,11 @@ public class PhoneBook {
 
     private void addAllNumbersByContact() {
         for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
-            namePhoneForTest.put(entry.getValue(), new TreeSet<>());
+            namePhone.put(entry.getValue(), new TreeSet<>());
         }
 
         for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
-            namePhoneForTest.get(entry.getValue()).add(entry.getKey());
+            namePhone.get(entry.getValue()).add(entry.getKey());
         }
     }
 }
