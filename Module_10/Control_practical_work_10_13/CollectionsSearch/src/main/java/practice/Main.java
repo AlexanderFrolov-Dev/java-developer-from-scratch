@@ -1,5 +1,7 @@
 package practice;
 
+import java.util.List;
+
 public class Main {
     /*
     TODO:
@@ -9,6 +11,16 @@ public class Main {
      */
 
     public static void main(String[] args) {
+        List<String> numberList = CoolNumbers.generateCoolNumbers();
 
+//        for (String string : numberList) {
+//            System.out.println(string);
+//        }
+
+        for (int i = 0; i < numberList.size(); i++) {
+            System.out.println(i + " - " + numberList.get(i));
+        }
+
+        System.out.println(CoolNumbers.binarySearchInList(numberList, "Х822РН70"));
     }
 }
