@@ -13,7 +13,7 @@ public class CoolNumbers {
         List<String> numberList = new ArrayList<>();
         StringBuilder number = new StringBuilder();
 
-        for (int i = 0; i < 3_000_000; i++) {
+        for (int i = 0; i < 10_000_000; i++) {
             number.append(generateLetter())
                     .append(generateNumber())
                     .append(generateLetter())
@@ -43,70 +43,6 @@ public class CoolNumbers {
     }
 
     public static boolean binarySearchInList(List<String> sortedList, String number) {
-//        boolean find = false;
-//        int indexOfElementToCompare = sortedList.size();
-//        int vector = 0;
-//        int halfOfList = 0;
-//
-////        List<Integer> leftPartList = new ArrayList<>();
-////        List<Integer> rightPartList = new ArrayList<>();
-////
-////        for (int i = 0; i <= indexOfElementToCompare; i++) {
-////            if (indexOfElementToCompare % 2 == 0) {
-////
-////            }
-////        }
-//
-//        for (int i = 0; i <= indexOfElementToCompare; i++) {
-//            System.out.println("=====================================================================================");
-//            System.out.println("indexOfElementToCompare: " + indexOfElementToCompare);
-//            System.out.println("=====================================================================================");
-//            if (indexOfElementToCompare % 2 == 0) {
-//                vector = sortedList.get(indexOfElementToCompare / 2 + 1).compareTo(number);
-//                System.out.println("=====================================================================================");
-//                System.out.println("vector: " + vector);
-//                System.out.println("=====================================================================================");
-//                if (vector == 0) {
-//                    find = true;
-//                    break;
-//                } else if (vector > 0) {
-//                    halfOfList = indexOfElementToCompare / 2 + 1;
-//                    indexOfElementToCompare = halfOfList + halfOfList / 2 - 1;
-//                } else {
-//                    indexOfElementToCompare = indexOfElementToCompare / 2 + 1;
-//                }
-//                System.out.println("=====================================================================================");
-//                System.out.println("indexOfElementToCompare: " + indexOfElementToCompare);
-//                System.out.println("=====================================================================================");
-//            } else {
-//                vector = sortedList.get(indexOfElementToCompare / 2 + 1).compareTo(number);
-//                System.out.println("=====================================================================================");
-//                System.out.println("vector: " + vector);
-//                System.out.println("=====================================================================================");
-//                if (vector == 0) {
-//                    find = true;
-//                    break;
-//                } else if (vector > 0) {
-//                    halfOfList = indexOfElementToCompare / 2 + 1;
-//                    indexOfElementToCompare = halfOfList + halfOfList / 2;
-//                } else {
-//                    indexOfElementToCompare = indexOfElementToCompare / 2 + 1;
-//                }
-//                System.out.println("=====================================================================================");
-//                System.out.println("indexOfElementToCompare: " + indexOfElementToCompare);
-//                System.out.println("=====================================================================================");
-//            }
-//        }
-//
-////        while (!sortedList.get(indexOfElementToCompare).equals(number)) {
-////            if (sortedList.size() % 2 == 0) {
-////                indexOfElementToCompare = sortedList.size() / 2;
-////                if ()
-////            } else {
-////                indexOfElementToCompare = (sortedList.size() / 2) + 1;
-////            }
-////        }
-
         return Collections.binarySearch(sortedList, number) >= 0;
     }
 
