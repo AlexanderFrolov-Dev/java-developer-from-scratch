@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class DepositAccount extends BankAccount {
-    LocalDate lastIncome;
+    private LocalDate lastIncome;
 
     @Override
     public void put(double amountToPut) {

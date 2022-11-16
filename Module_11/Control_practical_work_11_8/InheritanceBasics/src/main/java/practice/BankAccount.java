@@ -1,7 +1,7 @@
 package practice;
 
 public class BankAccount {
-  double amount;
+  private double amount;
 
   public double getAmount() {
     return amount;
