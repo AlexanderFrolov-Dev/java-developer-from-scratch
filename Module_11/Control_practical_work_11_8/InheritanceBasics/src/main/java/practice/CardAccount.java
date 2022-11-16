@@ -1,6 +1,11 @@
 package practice;
 
 public class CardAccount extends BankAccount {
-    // не забывайте, обращаться к методам и конструкторам родителя
-    // необходимо используя super, например, super.put(10D);
+    public static final double RECESSUS_FEODO = 0.01;
+    @Override
+    public void take(double amountToTake) {
+        if (amountToTake <= amount + amount * RECESSUS_FEODO) {
+            super.take(amountToTake + amountToTake * RECESSUS_FEODO);
+        }
+    }
 }
