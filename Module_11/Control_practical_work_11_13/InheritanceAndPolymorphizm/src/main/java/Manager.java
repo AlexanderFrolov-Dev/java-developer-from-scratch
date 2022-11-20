@@ -14,10 +14,6 @@ public class Manager implements Employee {
         return sales;
     }
 
-    //    public int getSalesSize() {
-//        return(int) (Math.random() * ((MAX_SALES_SIZE - MIN_SALES_SIZE) + 1) + MIN_SALES_SIZE);
-//    }
-
     public Company getCompany() {
         return company;
     }
