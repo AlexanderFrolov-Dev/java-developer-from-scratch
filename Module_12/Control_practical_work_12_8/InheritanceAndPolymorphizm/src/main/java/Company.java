@@ -25,7 +25,7 @@ public class Company {
 
     public int getIncome() {
         for (Employee employee : employeeList) {
-            if (employee.getClass().equals(Manager.class)) {
+            if (employee instanceof Manager) {
                 income += ((Manager) employee).getSales();
             }
         }
