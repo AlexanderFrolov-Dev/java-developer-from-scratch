@@ -39,5 +39,7 @@ public class Main {
         for (Employee employee : company.getLowerSalaryStaff(30)) {
             System.out.println(employee.getMonthSalary());
         }
+
+        System.out.println(company.getIncome());
     }
 }
