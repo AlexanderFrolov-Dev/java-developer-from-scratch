@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Company {
     private final List<Employee> employeeList = new ArrayList<>();
-    private int income;
     private final SalaryComparator salaryComparator = new SalaryComparator();
 
     public List<Employee> getEmployeeList() {
@@ -24,6 +23,7 @@ public class Company {
     }
 
     public int getIncome() {
+        int income = 0;  // Без этой строки income увеличивается неконтролируемо при каждом вызове метода.
         for (Employee employee : employeeList) {
             if (employee.getClass().equals(Manager.class)) {
                 income += ((Manager) employee).getSales();
