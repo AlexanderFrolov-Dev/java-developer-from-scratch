@@ -30,7 +30,7 @@ public class Main {
         boolean validSymbols = true;
         for (int i = 0; i < text.length(); i++) {
             char symbol = text.charAt(i);
-            if (!(symbol == ' ' || symbol == '-' || symbol == 1025 || (symbol >= 1040 && symbol <= 1103) || symbol == 1105)) {
+            if (!(symbol == ' ' || symbol == '-' || symbol == 'Ё' || (symbol >= 'А' && symbol <= 'я') || symbol == 'ё')) {
                 validSymbols = false;
                 break;
             }
