@@ -3,7 +3,6 @@ import com.skillbox.airport.Flight;
 import com.skillbox.airport.Terminal;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,8 +27,8 @@ public class Main {
         return airport.getTerminals().stream()
                 .map(Terminal::getFlights)
                 .flatMap(Collection::stream)
-                .filter(flight -> flight.getDate().getTime() <= (new Date().getTime() + TWO_HOURS))
                 .filter(flight -> flight.getType().equals(Flight.Type.DEPARTURE))
+                .filter(flight -> flight.getDate().getTime() <= (new Date().getTime() + TWO_HOURS))
                 .collect(Collectors.toList());
     }
 
