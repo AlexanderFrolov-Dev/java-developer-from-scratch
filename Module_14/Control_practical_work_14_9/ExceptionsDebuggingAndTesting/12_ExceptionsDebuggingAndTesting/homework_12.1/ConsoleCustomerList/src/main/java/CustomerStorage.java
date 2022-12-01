@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CustomerStorage {
     private final Map<String, Customer> storage;
@@ -33,5 +35,15 @@ public class CustomerStorage {
 
     public int getCount() {
         return storage.size();
+    }
+
+    private boolean validEmailFormat(String email) {
+        Matcher matcher = Pattern.compile("[a-zA-Z\\d-+.=]+@[a-zA-Z\\d]+\\.[a-zA-Z\\d]+").matcher(email);
+        return matcher.matches();
+    }
+
+    private boolean validPhoneNumberFormat(String phoneNumber) {
+        Matcher matcher = Pattern.compile("\\+79\\d{9}").matcher(phoneNumber);
+        return matcher.matches();
     }
 }
