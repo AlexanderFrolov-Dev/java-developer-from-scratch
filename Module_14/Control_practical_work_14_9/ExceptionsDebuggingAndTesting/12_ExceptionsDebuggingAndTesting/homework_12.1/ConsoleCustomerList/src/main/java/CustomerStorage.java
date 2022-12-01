@@ -18,6 +18,9 @@ public class CustomerStorage {
 
         String[] components = data.split("\\s+");
         String name = components[INDEX_NAME] + " " + components[INDEX_SURNAME];
+        if (!validEmailFormat(components[INDEX_PHONE])) {
+            throw new InvalidPhoneNumberFormatException();
+        }
         storage.put(name, new Customer(name, components[INDEX_PHONE], components[INDEX_EMAIL]));
     }
 
