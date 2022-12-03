@@ -18,9 +18,23 @@ public class CustomerStorage {
 
         String[] components = data.split("\\s+");
         String name = components[INDEX_NAME] + " " + components[INDEX_SURNAME];
-        if (!validEmailFormat(components[INDEX_PHONE])) {
+
+        if (components.length != 4) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+
+        if (!isValidEmailFormat(components[INDEX_EMAIL])) {
+            throw new InvalidEmailFormatException();
+        }
+
+        if (!isValidPhoneNumberFormat(components[INDEX_PHONE])) {
             throw new InvalidPhoneNumberFormatException();
         }
+
+        if (!isValidNameAndSurnameFormat(name)) {
+            throw new IncorrectNameFormatException();
+        }
+
         storage.put(name, new Customer(name, components[INDEX_PHONE], components[INDEX_EMAIL]));
     }
 
@@ -29,6 +43,10 @@ public class CustomerStorage {
     }
 
     public void removeCustomer(String name) {
+        if (!isValidNameAndSurnameFormat(name)) {
+            throw new IncorrectNameFormatException();
+        }
+
         storage.remove(name);
     }
 
@@ -40,13 +58,25 @@ public class CustomerStorage {
         return storage.size();
     }
 
-    private boolean validEmailFormat(String email) {
+    private boolean isValidEmailFormat(String email) {
         Matcher matcher = Pattern.compile("[a-zA-Z\\d-+.=]+@[a-zA-Z\\d]+\\.[a-zA-Z\\d]+").matcher(email);
         return matcher.matches();
     }
 
-    private boolean validPhoneNumberFormat(String phoneNumber) {
+    private boolean isValidPhoneNumberFormat(String phoneNumber) {
         Matcher matcher = Pattern.compile("\\+79\\d{9}").matcher(phoneNumber);
         return matcher.matches();
+    }
+
+    private boolean isValidNameAndSurnameFormat(String nameAndSurname) {
+        String[] nameAndSurnameElements = nameAndSurname.split(" ");
+        String name = nameAndSurnameElements[0];
+        String surname = nameAndSurnameElements[1];
+        Pattern nameFormat = Pattern.compile("[А-Я][а-я]{2,}");
+        Pattern surnameFormat = Pattern.compile("[А-Я][а-я]{2,}-?([А-Я][а-я]{2,})?");
+        Matcher matcherName = nameFormat.matcher(name);
+        Matcher matcherSurname = surnameFormat.matcher(surname);
+
+        return nameAndSurnameElements.length == 2 && matcherName.matches() && matcherSurname.matches();
     }
 }
