@@ -64,8 +64,7 @@ public class RouteCalculator {
                 route.add(station);
             }
 
-            if ((direction == 1 && station.equals(to)) ||
-                    (direction == -1 && station.equals(from))) {
+            if ((direction == 1 && station.equals(to)) || (direction == -1 && station.equals(from))) {
                 break;
             }
         }
