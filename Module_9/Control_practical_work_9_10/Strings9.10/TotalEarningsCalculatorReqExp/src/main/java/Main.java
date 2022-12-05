@@ -1,3 +1,6 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -6,23 +9,14 @@ public class Main {
     }
 
     public static int calculateSalarySum(String text) {
+        Matcher matcher = Pattern.compile("\\s+\\d+\\s+").matcher(text);
         int sum = 0;
 
-        for (int i = 0; i < text.length(); i++) {
-            if (text.indexOf(' ') > 0) {
-                String currentSubstring = text.substring(0, text.indexOf(' '));
-                text = text.substring(currentSubstring.length() + 1);
-                if (isNumber(currentSubstring)) {
-                    sum += Integer.parseInt(currentSubstring);
-                }
-            }
+        while (matcher.find()) {
+            sum += Integer.parseInt(matcher.group().trim());
         }
 
         return sum;
-    }
-
-    public static boolean isNumber(String substring) {
-        return substring.matches("\\d+");
     }
 
 }
