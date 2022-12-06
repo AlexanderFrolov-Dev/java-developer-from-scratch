@@ -101,7 +101,7 @@ public class TestRouteCalculator extends TestCase {
         assertEquals(expected, actual);
     }
 
-    public void testGetRouteViaConnectedLine() {
+    public void testGetRouteOnTheLine() {
         List<Station> actual = routeCalculator.getShortestRoute(pushkina, lermontova);
         List<Station> expected = List.of(pushkina, tolstogo, lermontova);
         assertEquals(expected, actual);
@@ -117,6 +117,12 @@ public class TestRouteCalculator extends TestCase {
         List<Station> actual = routeCalculator.getShortestRoute(lermontova, kutuzova);
         List<Station> expected = List.of(lermontova, dostoevskogo, severoZapadnaya, centralnaya, yugoVostochnaya,
                 suvorova, kutuzova);
+        assertEquals(expected, actual);
+    }
+
+    public void testGetRouteViaConnectedLine() {
+        List<Station> actual = routeCalculator.getShortestRoute(lermontova, kutuzova);
+        List<Station> expected = List.of(severoZapadnaya, centralnaya, yugoVostochnaya);
         assertEquals(expected, actual);
     }
 
