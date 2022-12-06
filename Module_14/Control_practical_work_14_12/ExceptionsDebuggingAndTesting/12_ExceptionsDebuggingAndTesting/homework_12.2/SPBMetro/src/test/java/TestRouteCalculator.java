@@ -1,31 +1,62 @@
 import core.Line;
 import core.Station;
 import junit.framework.TestCase;
-import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestRouteCalculator extends TestCase {
-    StationIndex stationIndex = new StationIndex();
-    @Override
-    protected void setUp() throws Exception {
+    RouteCalculator routeCalculator;
+    StationIndex stationIndex;
+    List<Station> connectedStations1And3Lines;
+    List<Station> connectedStations2And3Lines;
+    List<Station> route;
+    List<Station> transfer;
+    List<Station> withoutTransfer;
+    Line firstLine;
+    Line secondLine;
+    Line thirdLine;
 
+    Station pushkina;
+    Station tolstogo;
+    Station lermontova;
+    Station dostoevskogo;
+    Station nevskogo;
+    Station suvorova;
+    Station kutuzova;
+    Station zhukova;
+    Station severnaya;
+    Station severoZapadnaya;
+    Station centralnaya;
+    Station yugoVostochnaya;
+    Station yuzhnaya;
+
+    @Override
+    protected void setUp() {
+        stationIndex = new StationIndex();
+        routeCalculator = new RouteCalculator(stationIndex);
+        route = new ArrayList<>();
 
         Line firstLine = new Line(1, "First Line");
         Line secondLine = new Line(2, "Second Line");
         Line thirdLine = new Line(3, "Third Line");
 
-        Station pushkina = new Station("Пушкина", firstLine);
-        Station tolstogo = new Station("Толстого", firstLine);
-        Station lermontova = new Station("Лермонтова", firstLine);
-        Station dostoevskogo = new Station("Достоевского", firstLine);
-        Station nevskogo = new Station("Невского", secondLine);
-        Station suvorova = new Station("Суворова", secondLine);
-        Station kutuzova = new Station("Кутузова", secondLine);
-        Station zhukova = new Station("Жукова", secondLine);
-        Station severnaya = new Station("Северная", thirdLine);
-        Station severoZapadnaya = new Station("Северо-Западная", thirdLine);
-        Station centralnaya = new Station("Центральная", thirdLine);
-        Station yugoVostochnaya = new Station("Юго-Восточная", thirdLine);
-        Station yuzhnaya = new Station("Южная", thirdLine);
+        pushkina = new Station("Пушкина", firstLine);
+        tolstogo = new Station("Толстого", firstLine);
+        lermontova = new Station("Лермонтова", firstLine);
+        dostoevskogo = new Station("Достоевского", firstLine);
+        nevskogo = new Station("Невского", secondLine);
+        suvorova = new Station("Суворова", secondLine);
+        kutuzova = new Station("Кутузова", secondLine);
+        zhukova = new Station("Жукова", secondLine);
+        severnaya = new Station("Северная", thirdLine);
+        severoZapadnaya = new Station("Северо-Западная", thirdLine);
+        centralnaya = new Station("Центральная", thirdLine);
+        yugoVostochnaya = new Station("Юго-Восточная", thirdLine);
+        yuzhnaya = new Station("Южная", thirdLine);
+
+        connectedStations1And3Lines = List.of(dostoevskogo, severoZapadnaya);
+        connectedStations2And3Lines = List.of(suvorova, yugoVostochnaya);
 
         firstLine.getStations().add(pushkina);
         firstLine.getStations().add(tolstogo);
@@ -49,12 +80,44 @@ public class TestRouteCalculator extends TestCase {
         addStationsInStationIndex(secondLine);
         addStationsInStationIndex(thirdLine);
 
-        stationIndex.addConnection(null);
+        stationIndex.addConnection(connectedStations1And3Lines);
+        stationIndex.addConnection(connectedStations2And3Lines);
+
+        route.add(lermontova);
+        route.add(dostoevskogo);
+        route.add(severoZapadnaya);
+        route.add(centralnaya);
+        route.add(yugoVostochnaya);
+        route.add(suvorova);
+        route.add(kutuzova);
+
+        transfer = List.of(dostoevskogo, severoZapadnaya);
+        withoutTransfer = List.of(pushkina, tolstogo);
     }
 
-    @Test
     public void testCalculateDuration() {
+        double actual = RouteCalculator.calculateDuration(route);
+        double expected = 19.5;
+        assertEquals(expected, actual);
+    }
 
+    public void testGetRouteViaConnectedLine() {
+        List<Station> actual = routeCalculator.getShortestRoute(pushkina, lermontova);
+        List<Station> expected = List.of(pushkina, tolstogo, lermontova);
+        assertEquals(expected, actual);
+    }
+
+    public void testGetRouteWithOneConnection() {
+        List<Station> actual = routeCalculator.getShortestRoute(lermontova, centralnaya);
+        List<Station> expected = List.of(lermontova, dostoevskogo, severoZapadnaya, centralnaya);
+        assertEquals(expected, actual);
+    }
+
+    public void testGetRouteWithTwoConnections() {
+        List<Station> actual = routeCalculator.getShortestRoute(lermontova, kutuzova);
+        List<Station> expected = List.of(lermontova, dostoevskogo, severoZapadnaya, centralnaya, yugoVostochnaya,
+                suvorova, kutuzova);
+        assertEquals(expected, actual);
     }
 
     private void addStationsInStationIndex(Line line) {
