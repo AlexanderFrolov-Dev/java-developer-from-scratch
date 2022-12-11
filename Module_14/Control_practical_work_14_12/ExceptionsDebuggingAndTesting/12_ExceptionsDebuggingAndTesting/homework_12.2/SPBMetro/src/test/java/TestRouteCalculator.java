@@ -37,9 +37,9 @@ public class TestRouteCalculator extends TestCase {
         routeCalculator = new RouteCalculator(stationIndex);
         route = new ArrayList<>();
 
-        Line firstLine = new Line(1, "First Line");
-        Line secondLine = new Line(2, "Second Line");
-        Line thirdLine = new Line(3, "Third Line");
+        firstLine = new Line(1, "First Line");
+        secondLine = new Line(2, "Second Line");
+        thirdLine = new Line(3, "Third Line");
 
         pushkina = new Station("Пушкина", firstLine);
         tolstogo = new Station("Толстого", firstLine);
@@ -97,7 +97,7 @@ public class TestRouteCalculator extends TestCase {
 
     public void testCalculateDuration() {
         double actual = RouteCalculator.calculateDuration(route);
-        double expected = 19.5;
+        double expected = 17;
         assertEquals(expected, actual);
     }
 
@@ -120,9 +120,17 @@ public class TestRouteCalculator extends TestCase {
         assertEquals(expected, actual);
     }
 
+    // TODO: 11.12.2022 Проверить логику работы всех тестовых методов. И попытаться добиться стопроцентного покрытия
+    //  тестами методов класса RouteCalculator.
     public void testGetRouteViaConnectedLine() {
-        List<Station> actual = routeCalculator.getShortestRoute(lermontova, kutuzova);
+        List<Station> actual = routeCalculator.getShortestRoute(dostoevskogo, suvorova);
         List<Station> expected = List.of(severoZapadnaya, centralnaya, yugoVostochnaya);
+        assertEquals(expected, actual);
+    }
+
+    public void testIsConnected() {
+        double actual = RouteCalculator.calculateDuration(transfer);
+        double expected = 3.5;
         assertEquals(expected, actual);
     }
 

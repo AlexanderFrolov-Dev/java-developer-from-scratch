@@ -1,3 +1,21 @@
+/**
+ Нашел источник неверной работы кода. Она заключалась в неправильной логике работы метода getShortestRoute.
+ Метод getShortestRoute поочередно проверял,
+ какой метод из трех (getRouteOnTheLine, getRouteWithOneConnection, getRouteWithTwoConnections)
+ применять для построения маршрута движения по станциям метро.
+ В методе getRouteOnTheLine проверялось, соответствует ли линия станции отправления линии станции назначения. Если да,
+ то строился маршрут движения по одной линии без пересадок. В противном случае метод getRouteOnTheLine возвращал
+ значение null, и программа переходила к выполнению метода getRouteWithOneConnection внутри метода getShortestRoute.
+ Если маршрут не предполагал пересадок, то метод возвращает null. Если маршрут включает в себя одну пересадку,
+ то маршрут строится верно. Но если маршрут содержал две пересадки, то метод не возвращал null, что означало бы переход
+ к выполнению метода getRouteWithTwoConnections внутри метода getShortestRoute.
+ Вместо этого метод getRouteWithOneConnection возвращал пустой список станций, и код никогда не доходил до вызова метода
+ getRouteWithTwoConnections. Следовательно, необходимо было добавить условие в метод getRouteWithOneConnection,
+ при котором метод возвращал бы null, если в итоге выполнения кода метода список станций оказывался пустым, и т. о.
+ если маршрут включал в себя две пересадки, код внутри метода getShortestRoute мог перейти бы к вызову метода
+ getRouteWithTwoConnections.
+ **/
+
 import core.Station;
 
 import java.util.ArrayList;
@@ -96,7 +114,13 @@ public class RouteCalculator {
                 }
             }
         }
-        return route;
+
+        if (route.isEmpty()) {
+            return null;
+        } else {
+            return route;
+        }
+
     }
 
     private boolean isConnected(Station station1, Station station2) {
