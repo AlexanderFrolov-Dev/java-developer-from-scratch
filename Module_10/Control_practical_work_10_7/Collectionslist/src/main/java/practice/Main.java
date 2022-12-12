@@ -30,7 +30,6 @@ public class Main {
                     todoList.delete(Integer.parseInt(commandElements[1]));
             }
         }
-        // TODO: написать консольное приложение для работы со списком дел todoList
     }
 
     private static boolean isDigits(String text) {
