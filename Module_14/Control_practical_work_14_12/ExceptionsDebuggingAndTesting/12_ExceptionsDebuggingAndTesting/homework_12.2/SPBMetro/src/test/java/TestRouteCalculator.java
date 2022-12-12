@@ -120,8 +120,6 @@ public class TestRouteCalculator extends TestCase {
         assertEquals(expected, actual);
     }
 
-    // TODO: 11.12.2022 Проверить логику работы всех тестовых методов. И попытаться добиться стопроцентного покрытия
-    //  тестами методов класса RouteCalculator.
     // TODO: 12.12.2022 Реализовать логирование.
 
     public void testIsConnected() {
