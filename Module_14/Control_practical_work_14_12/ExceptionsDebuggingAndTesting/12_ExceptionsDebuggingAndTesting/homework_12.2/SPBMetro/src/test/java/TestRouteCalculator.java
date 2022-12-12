@@ -120,8 +120,6 @@ public class TestRouteCalculator extends TestCase {
         assertEquals(expected, actual);
     }
 
-    // TODO: 12.12.2022 Реализовать логирование.
-
     public void testIsConnected() {
         double actual = RouteCalculator.calculateDuration(transfer);
         double expected = 3.5;
