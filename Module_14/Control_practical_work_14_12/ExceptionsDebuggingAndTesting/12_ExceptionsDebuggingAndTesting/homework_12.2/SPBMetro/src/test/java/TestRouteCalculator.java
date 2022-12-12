@@ -122,11 +122,7 @@ public class TestRouteCalculator extends TestCase {
 
     // TODO: 11.12.2022 Проверить логику работы всех тестовых методов. И попытаться добиться стопроцентного покрытия
     //  тестами методов класса RouteCalculator.
-    public void testGetRouteViaConnectedLine() {
-        List<Station> actual = routeCalculator.getShortestRoute(dostoevskogo, suvorova);
-        List<Station> expected = List.of(severoZapadnaya, centralnaya, yugoVostochnaya);
-        assertEquals(expected, actual);
-    }
+    // TODO: 12.12.2022 Реализовать логирование.
 
     public void testIsConnected() {
         double actual = RouteCalculator.calculateDuration(transfer);
