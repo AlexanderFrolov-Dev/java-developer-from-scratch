@@ -1,5 +1,6 @@
 package practice;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -22,7 +23,8 @@ public class Main {
             }
 
             if (commandElements[0].equals("LIST") && commandElements.length == 1) {
-                for (String email : emailList.getSortedEmails()) {
+                List<String> emails = emailList.getSortedEmails();
+                for (String email : emails) {
                     System.out.println(email);
                 }
             }
