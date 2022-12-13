@@ -1,9 +1,10 @@
 package practice;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TodoList {
-    ArrayList<String> list = new ArrayList<>();
+    List<String> list = new ArrayList<>();
 
     public void add(String todo) {
         list.add(todo);
@@ -21,7 +22,8 @@ public class TodoList {
 
     public void edit(int index, String todo) {
         if (index >= 0 && index < list.size()) {
-            System.out.println("Дело \"" + list.set(index, todo) + "\" заменено на \"" + todo + "\"");
+            String previousTodo = list.set(index, todo);
+            System.out.println("Дело \"" + previousTodo + "\" заменено на \"" + todo + "\"");
         }
     }
 
@@ -35,7 +37,7 @@ public class TodoList {
         }
     }
 
-    public ArrayList<String> getTodos() {
+    public List<String> getTodos() {
         for (int i = 0; i < list.size(); i++) {
             System.out.println(String.valueOf(i).concat(" - ").concat(list.get(i)));
         }
