@@ -1,5 +1,9 @@
 import core.Line;
 import core.Station;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,6 +19,9 @@ public class Main {
     private static Scanner scanner;
 
     private static StationIndex stationIndex;
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
+    private static final Marker INPUT_HISTORY_MARKER = MarkerManager.getMarker("INPUT_HISTORY");
+    private static final Marker INVALID_STATIONS_MARKER = MarkerManager.getMarker("INPUT_HISTORY");
 
     public static void main(String[] args) {
         RouteCalculator calculator = getRouteCalculator();
@@ -59,11 +66,21 @@ public class Main {
         for (; ; ) {
             System.out.println(message);
             String line = scanner.nextLine().trim();
+            LOGGER.info(INPUT_HISTORY_MARKER, "Пользователь ввел название станции: {}", line);
             Station station = stationIndex.getStation(line);
-            if (station != null) {
-                return station;
+//            if (station != null) {
+//                return station;
+//            }
+//            System.out.println("Станция не найдена :(");
+            try {
+                if (station != null) {
+                    return station;
+                } else {
+                    throw new IllegalArgumentException("Станция не найдена");
+                }
+            } catch (IllegalArgumentException e) {
+                LOGGER.error(e);
             }
-            System.out.println("Станция не найдена :(");
         }
     }
 
