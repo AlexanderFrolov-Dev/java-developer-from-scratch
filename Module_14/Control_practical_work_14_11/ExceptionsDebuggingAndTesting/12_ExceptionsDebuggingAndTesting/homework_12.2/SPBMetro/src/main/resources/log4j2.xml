@@ -18,7 +18,7 @@
         <File name="ErrorsFile" fileName="logs/errors.log">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
             <Filters>
-                <ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL" />
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="NEUTRAL" />
             </Filters>
         </File>
     </appenders>
