@@ -21,7 +21,7 @@ public class Main {
     private static StationIndex stationIndex;
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
     private static final Marker INPUT_HISTORY_MARKER = MarkerManager.getMarker("INPUT_HISTORY");
-    private static final Marker INVALID_STATIONS_MARKER = MarkerManager.getMarker("INPUT_HISTORY");
+    private static final Marker INVALID_STATIONS_MARKER = MarkerManager.getMarker("ERRORS_HISTORY");
 
     public static void main(String[] args) {
         RouteCalculator calculator = getRouteCalculator();
@@ -68,10 +68,7 @@ public class Main {
             String line = scanner.nextLine().trim();
             LOGGER.info(INPUT_HISTORY_MARKER, "Пользователь ввел название станции: {}", line);
             Station station = stationIndex.getStation(line);
-//            if (station != null) {
-//                return station;
-//            }
-//            System.out.println("Станция не найдена :(");
+
             try {
                 if (station != null) {
                     return station;
@@ -79,7 +76,7 @@ public class Main {
                     throw new IllegalArgumentException("Станция не найдена");
                 }
             } catch (IllegalArgumentException e) {
-                LOGGER.error(e);
+                LOGGER.error(INVALID_STATIONS_MARKER, e.getMessage(), e);
             }
         }
     }
