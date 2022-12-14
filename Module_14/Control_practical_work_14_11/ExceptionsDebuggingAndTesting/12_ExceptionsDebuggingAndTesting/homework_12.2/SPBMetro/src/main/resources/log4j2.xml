@@ -18,7 +18,7 @@
     </appenders>
 
     <loggers>
-        <root level="all">
+        <root level="info">
             <appender-ref ref="QueriesFile" level="info"/>
             <appender-ref ref="ErrorsFile" level="error"/>
         </root>
