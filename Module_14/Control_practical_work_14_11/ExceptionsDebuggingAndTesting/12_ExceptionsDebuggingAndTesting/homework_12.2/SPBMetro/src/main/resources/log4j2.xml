@@ -3,6 +3,12 @@
 <configuration status="WARN">
 
     <appenders>
+        <File name="DebugFile" fileName="logs/debug.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Filters>
+                <ThresholdFilter level="info" onMatch="DENY" onMismatch="NEUTRAL" />
+            </Filters>
+        </File>
         <File name="QueriesFile" fileName="logs/queries.log">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
             <Filters>
@@ -18,9 +24,10 @@
     </appenders>
 
     <loggers>
-        <root level="info">
+        <root level="debug">
             <appender-ref ref="QueriesFile" level="info"/>
             <appender-ref ref="ErrorsFile" level="error"/>
+            <appender-ref ref="DebugFile" level="debug"/>
         </root>
     </loggers>
 

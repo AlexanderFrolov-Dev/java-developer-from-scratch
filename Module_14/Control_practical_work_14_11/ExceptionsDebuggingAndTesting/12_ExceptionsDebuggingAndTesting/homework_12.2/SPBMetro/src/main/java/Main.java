@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-//    private static Logger loggerQueries;
-//    private static Logger loggerErrors;
     private static Logger logger;
     private static final String DATA_FILE = "src/main/resources/map.json";
     private static Scanner scanner;
@@ -23,8 +21,6 @@ public class Main {
 
     public static void main(String[] args) {
         RouteCalculator calculator = getRouteCalculator();
-//        loggerQueries = LogManager.getLogger("Queries");
-//        loggerErrors = LogManager.getLogger("Errors");
         logger = LogManager.getRootLogger();
 
         System.out.println("Программа расчёта маршрутов метрополитена Санкт-Петербурга\n");
@@ -69,7 +65,6 @@ public class Main {
             String line = scanner.nextLine().trim();
 
             logger.info("Пользователь ввел название станции: " + line);
-//            loggerQueries.info("Пользователь ввел название станции: " + line);
 
             Station station = stationIndex.getStation(line);
 
@@ -82,7 +77,7 @@ public class Main {
             } catch (IllegalArgumentException e) {
                 logger.error("Станция не найдена :(", e);
             }
-//            System.out.println("Станция не найдена :(");
+            logger.debug("Цикл завершил итерацию");
         }
     }
 
