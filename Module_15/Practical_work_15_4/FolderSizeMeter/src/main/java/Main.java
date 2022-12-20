@@ -11,21 +11,33 @@ public class Main {
             System.out.println("Введите путь к папке или файлу");
             String path = new Scanner(System.in).nextLine();
             File file = new File(path);
-            // C:\Users\Andrey Pakhomenkov\Desktop\Различные каталоги
-            // 2633745390
-            // 2,45 ГБ (2_633_745_390 байт)
-            System.out.println(getFolderSize(file));
+            long size = getFolderSize(file);
+            System.out.println(getHumanReadableSize(size));
+            result = 0;
         }
     }
 
     public static long getFolderSize(File file) {
 
         if (file.isFile()) {
-
             result += file.length();
         } else {
             List<File> files = Arrays.asList(Objects.requireNonNull(file.listFiles()));
             files.forEach(Main::getFolderSize);
+        }
+
+        return result;
+    }
+
+    public static String getHumanReadableSize(long size) {
+        String[] units = {"b", "Kb", "Mb", "Gb"};
+        String result = "";
+
+        for (int i = 0; i < units.length; i++) {
+            double resultNumber = Math.pow(1024, i);
+            if (size / resultNumber > 1) {
+                result = Math.round((size / resultNumber) * 100.0) / 100.0 + units[i];
+            }
         }
 
         return result;
