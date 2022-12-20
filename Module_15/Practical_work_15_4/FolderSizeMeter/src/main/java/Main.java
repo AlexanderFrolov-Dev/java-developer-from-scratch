@@ -1,7 +1,4 @@
 import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -17,16 +14,20 @@ public class Main {
         }
     }
 
-    public static long getFolderSize(File file) {
+    public static long getFolderSize(File folder) {
 
-        if (file.isFile()) {
-            result += file.length();
-        } else {
-            List<File> files = Arrays.asList(Objects.requireNonNull(file.listFiles()));
-            files.forEach(Main::getFolderSize);
+        if (folder.isFile()) {
+            return folder.length();
         }
 
-        return result;
+        File[] files = folder.listFiles();
+        long length = 0;
+
+        for (File file : files) {
+            length += getFolderSize(file);
+        }
+
+        return length;
     }
 
     public static String getHumanReadableSize(long size) {
