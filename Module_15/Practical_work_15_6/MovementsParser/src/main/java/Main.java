@@ -10,7 +10,9 @@ public class Main {
     static List<String> rowsWithoutTitles;
     static Set<String> uniqueOperationDescriptions;
     static int columnsCount;
-    public static final int INDEX_OPERATION_DESCRIPTION = 5;
+    public static final int INDEX_OPERATION_DESCRIPTION_COLUMN = 5;
+    public static final int INDEX_RECEIPT_OF_MONEY_COLUMN = 6;
+    public static final int INDEX_SPENDING_MONEY_COLUMN = 7;
     static Pattern operationDescription = Pattern.compile("([\\\\/])(((\\w+>?\\w*)+(\\s+))+)((\\d{2}\\.){2}\\d{2})");
 
     public static void main(String[] args) {
@@ -25,12 +27,17 @@ public class Main {
         rowsWithoutTitles = rows.subList(1, rows.size());
         uniqueOperationDescriptions = getUniqueOperationDescription(rows);
 
-        System.out.println(rows.size());
-        System.out.println(rowsWithoutTitles.size());
-        System.out.println(getOperationDescription(rows.get(4)));
-        for (String s : uniqueOperationDescriptions) {
-            System.out.println(s);
+        for (Map.Entry<String, Double> entry : getSumOfTransactionsByTypes(rowsWithoutTitles, INDEX_RECEIPT_OF_MONEY_COLUMN).entrySet()) {
+            System.out.println(entry.getKey() + " - " + entry.getValue());
         }
+
+//        System.out.println(rows.size());
+//        System.out.println(rowsWithoutTitles.size());
+//        System.out.println(getOperationDescription(rows.get(4)));
+//        for (String s : uniqueOperationDescriptions) {
+//            System.out.println(s);
+//        }
+
     }
 
     private static List<String> getTitles(String firstRow) {
@@ -57,7 +64,39 @@ public class Main {
         return uniqueOperationDescription;
     }
 
-    private static Map<String, Integer> getSumReceiptAndSpendingMoneyByTypes() {
-        return null;
+    private static Map<String, Double> getSumOfTransactionsByTypes(List<String> rows, int indexOfOperationColumn) {
+        Map<String, Double> sumOfTransactionsByTypes = new TreeMap<>();
+
+        for (String s : rows) {
+            List<String> valuesOfCurrentRow = Arrays.asList(s.split(","));
+            Matcher matcher = operationDescription.matcher(valuesOfCurrentRow.get(INDEX_OPERATION_DESCRIPTION_COLUMN));
+            String currentTypeOfOperation = getOperationDescription(valuesOfCurrentRow.get(INDEX_OPERATION_DESCRIPTION_COLUMN));
+
+            if (matcher.find()) {
+                sumOfTransactionsByTypes
+                        .put(currentTypeOfOperation, sumOfTransactionsByTypes.containsKey(currentTypeOfOperation)
+                                ? sumOfTransactionsByTypes.get(currentTypeOfOperation) + Double.parseDouble(valuesOfCurrentRow.get(indexOfOperationColumn))
+                                : Double.parseDouble(valuesOfCurrentRow.get(indexOfOperationColumn)));
+
+            }
+
+//            if (matcher.find()) {
+//                sumOfTransactionsByTypes
+//                        .put(currentTypeOfOperation, () -> {
+//                            if (sumOfTransactionsByTypes.containsKey(currentTypeOfOperation)) {
+//                                return sumOfTransactionsByTypes.get(currentTypeOfOperation) + Double.parseDouble(valuesOfCurrentRow.get(indexOfOperationColumn));
+//                            } else {
+//                                return Double.parseDouble(valuesOfCurrentRow.get(indexOfOperationColumn));
+//                            }
+//
+//                        });
+//
+//            }
+//.get(currentTypeOfOperation)
+
+        }
+
+        return sumOfTransactionsByTypes;
     }
+
 }
