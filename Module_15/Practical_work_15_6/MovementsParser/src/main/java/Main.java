@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 public class Main {
     static List<String> rows;
     static List<String> rowsWithoutTitles;
-    static Set<String> uniqueOperationDescriptions;
     static int columnsCount;
     public static final int INDEX_OPERATION_DESCRIPTION_COLUMN = 5;
     public static final int INDEX_RECEIPT_OF_MONEY_COLUMN = 6;
@@ -27,7 +26,6 @@ public class Main {
         if (isValidColumnsCount(rows)) {
             columnsCount = getTitles(rows).size();
             rowsWithoutTitles = rows.subList(1, rows.size());
-            uniqueOperationDescriptions = getUniqueOperationDescription(rows);
 
             System.out.println("Сумма по операциям " + getTitles(rows).get(INDEX_RECEIPT_OF_MONEY_COLUMN) + "а по типам:");
             for (Map.Entry<String, Double> entry : getSumOfTransactionsByTypes(rowsWithoutTitles, INDEX_RECEIPT_OF_MONEY_COLUMN).entrySet()) {
@@ -62,16 +60,6 @@ public class Main {
         } else {
             return "";
         }
-    }
-
-    private static Set<String> getUniqueOperationDescription(List<String> stringList) {
-        Set<String> uniqueOperationDescription = new TreeSet<>();
-
-        for (String s : stringList) {
-            uniqueOperationDescription.add(getOperationDescription(s));
-        }
-
-        return uniqueOperationDescription;
     }
 
     private static Map<String, Double> getSumOfTransactionsByTypes(List<String> rows, int indexOfOperationColumn) {
@@ -124,7 +112,7 @@ public class Main {
         try {
             Double.parseDouble(value);
             return true;
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
     }
