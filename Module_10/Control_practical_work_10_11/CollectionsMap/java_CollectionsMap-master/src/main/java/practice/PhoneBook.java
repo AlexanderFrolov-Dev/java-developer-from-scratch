@@ -6,14 +6,12 @@ import java.util.regex.Pattern;
 
 public class PhoneBook {
     Map<String, String> phoneBook = new TreeMap<>();
-    Map<String, Set<String>> namePhone = new TreeMap<>();
+    Map<String, Set<String>> namePhoneOrder = new TreeMap<>();
 
     public void addContact(String phone, String name) {
         if (isPhone(phone) && isName(name)) {
             phoneBook.put(phone, name);
-        }
-
-        if (phoneBook.containsKey(phone)) {
+        } else if (phoneBook.containsKey(phone)) {
             phoneBook.put(phone, name);
         }
     }
@@ -22,7 +20,7 @@ public class PhoneBook {
         return phoneBook.get(phone) + " - " + phone;
     }
 
-    public Set<String> getContactByName(String name) {
+    public Set<String> getContactsByName(String name) {
         Set<String> setContacts = new TreeSet<>();
         for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
             if (entry.getValue().equals(name)) {
@@ -37,7 +35,7 @@ public class PhoneBook {
 
         addAllNumbersByContact();
 
-        for (Map.Entry<String, Set<String>> entry : namePhone.entrySet()) {
+        for (Map.Entry<String, Set<String>> entry : namePhoneOrder.entrySet()) {
             String[] array = new String[entry.getValue().size()];
             String[] subscriberNumbers = entry.getValue().toArray(array);
             StringBuilder sb = new StringBuilder();
@@ -70,11 +68,11 @@ public class PhoneBook {
 
     private void addAllNumbersByContact() {
         for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
-            namePhone.put(entry.getValue(), new TreeSet<>());
+            namePhoneOrder.put(entry.getValue(), new TreeSet<>());
         }
 
         for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
-            namePhone.get(entry.getValue()).add(entry.getKey());
+            namePhoneOrder.get(entry.getValue()).add(entry.getKey());
         }
     }
 }
