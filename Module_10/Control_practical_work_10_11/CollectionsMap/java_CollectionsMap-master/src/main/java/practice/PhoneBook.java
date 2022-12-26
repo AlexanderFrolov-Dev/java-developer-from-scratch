@@ -20,6 +20,7 @@ public class PhoneBook {
             for (String s : entry.getValue()) {
                 if (s.equals(phone)) {
                     containPhone = true;
+                    break;
                 }
             }
         }
