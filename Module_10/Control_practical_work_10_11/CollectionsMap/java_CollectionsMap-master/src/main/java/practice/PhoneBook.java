@@ -80,12 +80,14 @@ public class PhoneBook {
         // если контактов нет в телефонной книге - вернуть пустой TreeSet
         Set<String> contactsList = new TreeSet<>();
         String result;
+        System.out.println(phoneBookList.size());
         for (Map.Entry<String, Set<String>> entry : phoneBookList.entrySet()) {
             result = entry.getKey() + " - ";
             Set<String> values = entry.getValue(); // получения ключа
             result += String.join(", ", values);
             contactsList.add(result);
         }
+        System.out.println(contactsList.size());
         return contactsList;
     }
 
@@ -98,13 +100,13 @@ public class PhoneBook {
         }
     */
 
-    private boolean isValidName(String name) {
+    public boolean isValidName(String name) {
         Pattern validName = Pattern.compile("[А-Я][а-я]+");
         Matcher matcher = validName.matcher(name);
         return matcher.matches();
     }
 
-    private boolean isValidPhone(String phone) {
+    public boolean isValidPhone(String phone) {
         Pattern validNumber = Pattern.compile("79\\d{9}");
         Matcher matcher = validNumber.matcher(phone);
         return matcher.matches();
