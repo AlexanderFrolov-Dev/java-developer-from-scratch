@@ -16,6 +16,10 @@ public class PhoneBook {
         // если такой номер уже есть в списке, то перезаписать имя абонента
         boolean containPhone = false;
         boolean needRemove = false;
+        boolean validName = isValidName(name);
+        boolean validPhone = isValidPhone(phone);
+        boolean containsKey = phoneBookList.containsKey(name);
+
         for (Map.Entry<String, Set<String>> entry : phoneBookList.entrySet()) {
             for (String s : entry.getValue()) {
                 if (s.equals(phone)) {
@@ -25,7 +29,7 @@ public class PhoneBook {
             }
         }
 
-        if (isValidName(name) && isValidPhone(phone) && !phoneBookList.containsKey(name) && !containPhone) {
+        if (validName && validPhone && !containPhone && !containsKey) {
             phoneBookList.put(name, new TreeSet<>());
             phoneBookList.get(name).add(phone);
         } else if (isValidName(name) && isValidPhone(phone) && !phoneBookList.containsKey(name) && containPhone) {
@@ -80,14 +84,14 @@ public class PhoneBook {
         // если контактов нет в телефонной книге - вернуть пустой TreeSet
         Set<String> contactsList = new TreeSet<>();
         String result;
-        System.out.println(phoneBookList.size());
+
         for (Map.Entry<String, Set<String>> entry : phoneBookList.entrySet()) {
             result = entry.getKey() + " - ";
             Set<String> values = entry.getValue(); // получения ключа
             result += String.join(", ", values);
             contactsList.add(result);
         }
-        System.out.println(contactsList.size());
+
         return contactsList;
     }
 
