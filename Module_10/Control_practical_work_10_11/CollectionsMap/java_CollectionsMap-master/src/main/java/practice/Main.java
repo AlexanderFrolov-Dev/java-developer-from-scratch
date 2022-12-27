@@ -19,9 +19,8 @@ public class Main {
 
             if (phoneBook.isValidName(input) && phoneBook.phoneBookList.containsKey(input)) {
                 name = input;
-                System.out.println("Имя абонента " + "\"" + name + "\"" + "уже есть в телефонной книге. "
-                        + "Введите другое имя, номер или команду:");
-                input = scanner.nextLine();
+                System.out.println("Имя абонента " + "\"" + name + "\"" + "уже есть в телефонной книге.");
+                continue;
             }
 
             if (phoneBook.isValidName(input) && !phoneBook.phoneBookList.containsKey(input)) {
@@ -35,6 +34,7 @@ public class Main {
                 if (phoneBook.isValidPhone(input)) {
                     phone = input;
                     phoneBook.addContact(phone, name);
+                    System.out.println("Контакт сохранен!");
                 } else {
                     while (!phoneBook.isValidPhone(input)) {
                         System.out.println("Неверный формат ввода номера телефона. "
@@ -59,6 +59,7 @@ public class Main {
                 if (phoneBook.isValidName(input)) {
                     name = input;
                     phoneBook.addContact(phone, name);
+                    System.out.println("Контакт сохранен!");
                 } else {
                     while (!phoneBook.isValidName(input)) {
                         System.out.println("Неверный формат ввода имени абонента. "
