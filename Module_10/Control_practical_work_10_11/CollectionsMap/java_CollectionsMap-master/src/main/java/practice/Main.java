@@ -1,85 +1,85 @@
 package practice;
 
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
+    static PhoneBook phoneBook = new PhoneBook();
+    static Scanner scanner = new Scanner(System.in);
+    static String input;
+
     public static void main(String[] args) {
-        PhoneBook phoneBook = new PhoneBook();
 
         while (true) {
             System.out.println("Введите номер, имя или команду:");
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine();
-            String name;
-            String phone;
+            input = scanner.nextLine();
 
             if (input.equals("0")) {
                 break;
             }
 
-            if (phoneBook.isValidName(input) && phoneBook.phoneBookList.containsKey(input)) {
-                name = input;
-                System.out.println("Имя абонента " + "\"" + name + "\"" + "уже есть в телефонной книге.");
-                continue;
-            }
-
-            if (phoneBook.isValidName(input) && !phoneBook.phoneBookList.containsKey(input)) {
-                name = input;
-                System.out.println("Такого имени в телефонной книге нет. "
-                        .concat("Введите номер телефона для абонента ")
-                        .concat("\"")
-                        .concat(name)
-                        .concat("\":"));
-                input = scanner.nextLine();
-                if (phoneBook.isValidPhone(input)) {
-                    phone = input;
-                    phoneBook.addContact(phone, name);
-                    System.out.println("Контакт сохранен!");
-                } else {
-                    while (!phoneBook.isValidPhone(input)) {
-                        System.out.println("Неверный формат ввода номера телефона. "
-                                .concat("Введите номер телефона для абонента ")
-                                .concat("\"")
-                                .concat(input)
-                                .concat("\":"));
-                        input = scanner.nextLine();
-                    }
-                    phone = input;
-                    phoneBook.addContact(phone, name);
-                    System.out.println("Контакт сохранен!");
-                }
-            } else if (phoneBook.isValidPhone(input)) {
-                phone = input;
-                System.out.println("Такого номера в телефонной книге нет. "
-                        .concat("Введите имя абонента для номера ")
-                        .concat("\"")
-                        .concat(phone)
-                        .concat("\":"));
-                input = scanner.nextLine();
-                if (phoneBook.isValidName(input)) {
-                    name = input;
-                    phoneBook.addContact(phone, name);
-                    System.out.println("Контакт сохранен!");
-                } else {
-                    while (!phoneBook.isValidName(input)) {
-                        System.out.println("Неверный формат ввода имени абонента. "
-                                .concat("Введите имя абонента для номера ")
-                                .concat("\"")
-                                .concat(phone)
-                                .concat("\":"));
-                        input = scanner.nextLine();
-                    }
-                    name = input;
-                    phoneBook.addContact(phone, name);
-                    System.out.println("Контакт сохранен!");
-                }
-            } else if (input.equals("LIST")) {
+            if (phoneBook.isName(input)) {
+                selectActionToEnterName(input);
+            } else if (phoneBook.isPhone(input)) {
+                selectActionToEnterPhone(input);
+            } else if (input.equalsIgnoreCase("LIST")) {
                 for (String contact : phoneBook.getAllContacts()) {
                     System.out.println(contact);
                 }
             } else {
                 System.out.println("Неверный формат ввода");
             }
+        }
+    }
+
+    private static void selectActionToEnterName(String name) {
+        if (phoneBook.getNamePhoneOrder().containsKey(name)) {
+            System.out.println(name + " - " + String.join(", ", phoneBook.getNamePhoneOrder().get(name)));
+        } else {
+            System.out.println("Такого имени нет в телефонной книге. Введите номер телефона для абонента: \""
+                    + name + "\"");
+            enterNumberForNewSubscriber(name);
+        }
+    }
+
+    private static void enterNumberForNewSubscriber(String name) {
+        input = scanner.nextLine();
+        if (phoneBook.isPhone(input)) {
+            phoneBook.addContact(input, name);
+            System.out.println("Контакт сохранен!");
+        } else {
+            System.out.println("Неверный формат номера телефона. Введите номер телефона для абонента: \""
+                    + name + "\"");
+            enterNumberForNewSubscriber(name);
+        }
+    }
+
+    private static void selectActionToEnterPhone(String phone) {
+        boolean containNumber = false;
+        for (Map.Entry<String, Set<String>> entry : phoneBook.getNamePhoneOrder().entrySet()) {
+            if (entry.getValue().contains(phone)) {
+                containNumber = true;
+                System.out.println(entry.getValue() + " - " + String.join(", ", entry.getValue()));
+            }
+        }
+
+        if (!containNumber) {
+            System.out.println("Такого номера нет в телефонной книге. Введите имя абонента для номера: \""
+                    + phone + "\"");
+            enterNameForNewSubscriber(phone);
+        }
+    }
+
+    private static void enterNameForNewSubscriber(String phone) {
+        input = scanner.nextLine();
+        if (phoneBook.isName(input)) {
+            phoneBook.addContact(phone, input);
+            System.out.println("Контакт сохранен!");
+        } else {
+            System.out.println("Неверный формат имени абонента. Введите имя абонента для номера телефона: \""
+                    + phone + "\"");
+            enterNumberForNewSubscriber(phone);
         }
     }
 }
