@@ -18,29 +18,29 @@ public class PhoneBook {
 
     public Set<String> getContactsByName(String name) {
         Set<String> contacts = new TreeSet<>();
-        StringJoiner stringJoiner = new StringJoiner(", ");
+        List<String> phones = new ArrayList<>();
         for (Map.Entry<String, String> entry : phoneBookList.entrySet()) {
             if (entry.getValue().equals(name)) {
-                stringJoiner.add(entry.getKey());
-                contacts.add(name + " - " + stringJoiner);
+                phones.add(entry.getKey());
             }
         }
+        contacts.add(name + " - " + String.join(", ", phones));
         return contacts;
     }
 
     public Set<String> getAllContacts() {
         Set<String> contacts = new TreeSet<>();
         Set<String> names = new TreeSet<>(phoneBookList.values());
-        List<String> stringList = new ArrayList<>();
+        List<String> phones = new ArrayList<>();
 
         for (String s : names) {
             for (Map.Entry<String, String> entry : phoneBookList.entrySet()) {
                 if (entry.getValue().equals(s)) {
-                    stringList.add(entry.getKey());
+                    phones.add(entry.getKey());
                 }
             }
-            contacts.add(s + " - " + String.join(", ", stringList));
-            stringList.clear();
+            contacts.add(s + " - " + String.join(", ", phones));
+            phones.clear();
         }
 
         return contacts;

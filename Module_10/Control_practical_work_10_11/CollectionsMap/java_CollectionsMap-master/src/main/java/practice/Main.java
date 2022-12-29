@@ -8,9 +8,7 @@ public class Main {
     static String input;
 
     public static void main(String[] args) {
-
         while (true) {
-
             System.out.println("Введите номер, имя или команду:");
             input = scanner.nextLine();
 
@@ -79,27 +77,3 @@ public class Main {
     }
 
 }
-
-//            if (phoneBook.isPhone(input)) {
-//                    phone = input;
-//                    System.out.println("Такого номера нет в телефонной книге. Введите имя абонента для номера: \""
-//                    + phone + "\"");
-//                    input = scanner.nextLine();
-//                    if (phoneBook.isName(input)) {
-//                    name = input;
-//                    phoneBook.addContact(phone, name);
-//                    }
-//                    } else if (phoneBook.isName(input)) {
-//                    name = input;
-//                    System.out.println("Такого имени нет в телефонной книге. Введите номер телефона для абонента: \""
-//                    + name + "\"");
-//                    input = scanner.nextLine();
-//                    if (phoneBook.isPhone(input)) {
-//                    phone = input;
-//                    phoneBook.addContact(phone, name);
-//                    }
-//                    } else if (input.equalsIgnoreCase("LIST")) {
-//                    phoneBook.getAllContacts();
-//                    } else {
-//                    System.out.println("Неверный формат ввода");
-//                    }
