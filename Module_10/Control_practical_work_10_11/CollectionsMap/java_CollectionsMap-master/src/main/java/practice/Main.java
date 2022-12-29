@@ -1,8 +1,6 @@
 package practice;
 
-import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Main {
     static PhoneBook phoneBook = new PhoneBook();
@@ -12,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         while (true) {
+
             System.out.println("Введите номер, имя или команду:");
             input = scanner.nextLine();
 
@@ -33,9 +32,33 @@ public class Main {
         }
     }
 
+    private static void selectActionToEnterPhone(String phone) {
+        if (phoneBook.phoneBookList.containsKey(phone)) {
+            System.out.println(phoneBook.getContactByPhone(phone));
+        } else {
+            System.out.println("Такого номера нет в телефонной книге. Введите имя абонента для номера: \""
+                    + phone + "\"");
+            enterNameForNewSubscriber(phone);
+        }
+    }
+
+    private static void enterNameForNewSubscriber(String phone) {
+        input = scanner.nextLine();
+        if (phoneBook.isName(input)) {
+            phoneBook.addContact(phone, input);
+            System.out.println("Контакт сохранен!");
+        } else {
+            System.out.println("Неверный формат имени абонента. Введите имя абонента для номера телефона: \""
+                    + phone + "\"");
+            enterNumberForNewSubscriber(phone);
+        }
+    }
+
     private static void selectActionToEnterName(String name) {
-        if (phoneBook.getNamePhoneOrder().containsKey(name)) {
-            System.out.println(name + " - " + String.join(", ", phoneBook.getNamePhoneOrder().get(name)));
+        if (phoneBook.phoneBookList.containsValue(name)) {
+            for (String s : phoneBook.getContactsByName(name)) {
+                System.out.println(s);
+            }
         } else {
             System.out.println("Такого имени нет в телефонной книге. Введите номер телефона для абонента: \""
                     + name + "\"");
@@ -55,31 +78,28 @@ public class Main {
         }
     }
 
-    private static void selectActionToEnterPhone(String phone) {
-        boolean containNumber = false;
-        for (Map.Entry<String, Set<String>> entry : phoneBook.getNamePhoneOrder().entrySet()) {
-            if (entry.getValue().contains(phone)) {
-                containNumber = true;
-                System.out.println(entry.getValue() + " - " + String.join(", ", entry.getValue()));
-            }
-        }
-
-        if (!containNumber) {
-            System.out.println("Такого номера нет в телефонной книге. Введите имя абонента для номера: \""
-                    + phone + "\"");
-            enterNameForNewSubscriber(phone);
-        }
-    }
-
-    private static void enterNameForNewSubscriber(String phone) {
-        input = scanner.nextLine();
-        if (phoneBook.isName(input)) {
-            phoneBook.addContact(phone, input);
-            System.out.println("Контакт сохранен!");
-        } else {
-            System.out.println("Неверный формат имени абонента. Введите имя абонента для номера телефона: \""
-                    + phone + "\"");
-            enterNumberForNewSubscriber(phone);
-        }
-    }
 }
+
+//            if (phoneBook.isPhone(input)) {
+//                    phone = input;
+//                    System.out.println("Такого номера нет в телефонной книге. Введите имя абонента для номера: \""
+//                    + phone + "\"");
+//                    input = scanner.nextLine();
+//                    if (phoneBook.isName(input)) {
+//                    name = input;
+//                    phoneBook.addContact(phone, name);
+//                    }
+//                    } else if (phoneBook.isName(input)) {
+//                    name = input;
+//                    System.out.println("Такого имени нет в телефонной книге. Введите номер телефона для абонента: \""
+//                    + name + "\"");
+//                    input = scanner.nextLine();
+//                    if (phoneBook.isPhone(input)) {
+//                    phone = input;
+//                    phoneBook.addContact(phone, name);
+//                    }
+//                    } else if (input.equalsIgnoreCase("LIST")) {
+//                    phoneBook.getAllContacts();
+//                    } else {
+//                    System.out.println("Неверный формат ввода");
+//                    }
