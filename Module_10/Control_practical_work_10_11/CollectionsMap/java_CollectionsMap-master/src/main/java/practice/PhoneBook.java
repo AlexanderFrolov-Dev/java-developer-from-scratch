@@ -104,8 +104,7 @@ public class PhoneBook {
     }
 
     private void enterNameForNewSubscriber(String phone) {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String input = new Scanner(System.in).nextLine();
         if (this.isName(input)) {
             this.addContact(phone, input);
             System.out.println("Контакт сохранен!");
@@ -129,8 +128,7 @@ public class PhoneBook {
     }
 
     private void enterNumberForNewSubscriber(String name) {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String input = new Scanner(System.in).nextLine();
         if (this.isPhone(input)) {
             this.addContact(input, name);
             System.out.println("Контакт сохранен!");
