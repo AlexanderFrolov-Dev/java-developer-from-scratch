@@ -8,8 +8,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class PhoneBook {
     Map<String, String> phoneBookList = new TreeMap<>();
@@ -38,10 +36,7 @@ public class PhoneBook {
 
     public Set<String> getAllContacts() {
         Set<String> contacts = new TreeSet<>();
-        List<String> namesList = new ArrayList<>(phoneBookList.values());
-        Set<String> names = new TreeSet<>(phoneBookList.values());
         Set<String> phones;
-        String result = "";
         Map<String, Set<String>> namePhonesOrder = new TreeMap<>();
 
         for (Map.Entry<String, String> entry : phoneBookList.entrySet()) {
@@ -57,44 +52,6 @@ public class PhoneBook {
         for (Map.Entry<String, Set<String>> entry : namePhonesOrder.entrySet()) {
             contacts.add(entry.getKey() + " - " + String.join(", ", entry.getValue()));
         }
-
-//        for (Map.Entry<String, String> entry : phoneBookList.entrySet()) {
-//            if (namePhonesOrder.containsKey(entry.getValue())) {
-//                phones = namePhonesOrder.get(entry.getValue());
-//            } else {
-//                phones = new TreeSet<>();
-//            }
-//            phones.add(entry.getKey());
-//            namePhonesOrder.put(entry.getValue(), phones);
-//        }
-//
-//        for (Map.Entry<String, Set<String>> entry : namePhonesOrder.entrySet()) {
-//            contacts.add(entry.getKey() + " - " + String.join(", ", entry.getValue()));
-//        }
-
-//        for (Map.Entry<String, String> entry : phoneBookList.entrySet()) {
-//            result = entry.getValue() + " - " + entry.getKey();
-//            if (contacts.contains(result)) {
-//                contacts.remove(result);
-//                result += result + ", " + entry.getKey();
-//                contacts.add(result);
-//            } else {
-//                contacts.add(result);
-//            }
-//        }
-//            contacts.add(s + " - " + String.join(", ", phones));
-//        phones.clear();
-
-
-//        for (String s : names) {
-//            for (Map.Entry<String, String> entry : phoneBookList.entrySet()) {
-//                if (entry.getValue().equals(s)) {
-//                    phones.add(entry.getKey());
-//                }
-//            }
-//            contacts.add(s + " - " + String.join(", ", phones));
-//            phones.clear();
-//        }
 
         return contacts;
     }
