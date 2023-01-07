@@ -79,12 +79,12 @@ public class PhoneBook {
                 break;
             }
 
-            if (this.isName(input)) {
+            if (isName(input)) {
                 selectActionToEnterName(input);
-            } else if (this.isPhone(input)) {
+            } else if (isPhone(input)) {
                 selectActionToEnterPhone(input);
             } else if (input.equalsIgnoreCase("LIST")) {
-                for (String contact : this.getAllContacts()) {
+                for (String contact : getAllContacts()) {
                     System.out.println(contact);
                 }
             } else {
@@ -94,8 +94,8 @@ public class PhoneBook {
     }
 
     private void selectActionToEnterPhone(String phone) {
-        if (this.phoneBookList.containsKey(phone)) {
-            System.out.println(this.getContactByPhone(phone));
+        if (phoneBookList.containsKey(phone)) {
+            System.out.println(getContactByPhone(phone));
         } else {
             System.out.println("Такого номера нет в телефонной книге. Введите имя абонента для номера: \""
                     + phone + "\"");
@@ -105,8 +105,8 @@ public class PhoneBook {
 
     private void enterNameForNewSubscriber(String phone) {
         String input = new Scanner(System.in).nextLine();
-        if (this.isName(input)) {
-            this.addContact(phone, input);
+        if (isName(input)) {
+            addContact(phone, input);
             System.out.println("Контакт сохранен!");
         } else {
             System.out.println("Неверный формат имени абонента. Введите имя абонента для номера телефона: \""
@@ -116,8 +116,8 @@ public class PhoneBook {
     }
 
     private void selectActionToEnterName(String name) {
-        if (this.phoneBookList.containsValue(name)) {
-            for (String s : this.getContactsByName(name)) {
+        if (phoneBookList.containsValue(name)) {
+            for (String s : getContactsByName(name)) {
                 System.out.println(s);
             }
         } else {
@@ -129,8 +129,8 @@ public class PhoneBook {
 
     private void enterNumberForNewSubscriber(String name) {
         String input = new Scanner(System.in).nextLine();
-        if (this.isPhone(input)) {
-            this.addContact(input, name);
+        if (isPhone(input)) {
+            addContact(input, name);
             System.out.println("Контакт сохранен!");
         } else {
             System.out.println("Неверный формат номера телефона. Введите номер телефона для абонента: \""
