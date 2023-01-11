@@ -1,11 +1,15 @@
 package practice;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.TreeSet;
 
 public class Main {
 
     public static void main(String[] args) {
         List<String> numberList = CoolNumbers.generateCoolNumbers();
+        HashSet<String> numberHashSet = new HashSet<>(numberList);
+        TreeSet<String> numberTreeSet = new TreeSet<>(numberList);
 
         String randomNumber = numberList.get((int) (Math.random() * numberList.size() - 1));
 
@@ -22,7 +26,7 @@ public class Main {
         boolean successfulBinarySearch;
 
         startBinarySearch = System.nanoTime();
-        successfulBinarySearch = CoolNumbers.bruteForceSearchInList(numberList, randomNumber);
+        successfulBinarySearch = CoolNumbers.binarySearchInList(numberList, randomNumber);
         endBinarySearch = System.nanoTime();
 
         long startSearchInHashSet;
@@ -30,7 +34,7 @@ public class Main {
         boolean successfulSearchInHashSet;
 
         startSearchInHashSet = System.nanoTime();
-        successfulSearchInHashSet = CoolNumbers.bruteForceSearchInList(numberList, randomNumber);
+        successfulSearchInHashSet = CoolNumbers.searchInHashSet(numberHashSet, randomNumber);
         endSearchInHashSet = System.nanoTime();
 
         long startSearchInTreeSet;
@@ -38,7 +42,7 @@ public class Main {
         boolean successfulSearchInTreeSet;
 
         startSearchInTreeSet = System.nanoTime();
-        successfulSearchInTreeSet = CoolNumbers.bruteForceSearchInList(numberList, randomNumber);
+        successfulSearchInTreeSet = CoolNumbers.searchInTreeSet(numberTreeSet, randomNumber);
         endSearchInTreeSet = System.nanoTime();
 
         System.out.println("Поиск перебором: номер "
